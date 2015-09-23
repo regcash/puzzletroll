@@ -1,0 +1,25 @@
+{
+  "name": "puzzletroll",
+  "version": "1.0.0",
+  "description": "cache puzzles throughout the internet",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanwholey/puzzletroll.git"
+  },
+  "author": "Regenerative Cashew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanwholey/puzzletroll/issues"
+  },
+  "homepage": "https://github.com/ryanwholey/puzzletroll#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  }
+}
