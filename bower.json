@@ -1,0 +1,24 @@
+{
+  "name": "puzzletroll",
+  "version": "1.0.0",
+  "description": "cache puzzles throughout the internet",
+  "main": [
+    "app.js"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "authors": [
+    "Regenerative Cashew"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
