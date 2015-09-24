@@ -27,15 +27,17 @@ module.exports.findChallenge = function(challenge)  {
 }
 
 module.exports.findUserById = function(id)  {
-  
+  User.findOne({
+    where: {
+      id: id
+    }
+  });
 }
 
 module.exports.findUserSolvedChallenges = function(user)  {
-
 }
 
 module.exports.ChallengeSolvedUsers = function(challenge) {
-
 }
 
 module.exports.createUser = function(user)  {
@@ -58,5 +60,21 @@ module.exports.createChallenge = function(challenge)  {
     score: challenge.score,
     difficulty: challenge.difficulty
   });
+}
+
+module.exports.removeUser = function(user)  {
+  User.findOne({
+    where: {
+      name: user
+    }
+  }).destroy();
+}
+
+module.exports.removeChallenge = function(challenge)  {
+  Challenge.findOne({
+    where: {
+      name: challenge
+    }
+  }).destroy();
 }
  
