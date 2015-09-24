@@ -1,8 +1,8 @@
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var configAuth = require('../server/config/auth');
-var query = require('../db/queryHandler');
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
+var configAuth = require('./auth');
+var query = require('../../db/queryHandler');
 
-var User = require('../db/models/User');
+var User = require('../../db/models/User');
 
 module.exports = function(passport){
 
