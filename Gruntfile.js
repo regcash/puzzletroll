@@ -30,9 +30,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['jshint']);
   grunt.registerTask('pull', function() {
-  	shell.exec('git pull upstream master');
-  	shell.exec('npm install');
-  	shell.exec('bower install');
+  	var c = shell.exec('git pull upstream master').code;
+    if(c !== 0) {
+    	shell.exec('npm install');
+    	shell.exec('bower install');
+    }
 	});
 
 };

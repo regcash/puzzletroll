@@ -20,6 +20,9 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    ".DS_Store",
+    "npm-debug.log",
+    "server/config/auth.js"
   ]
 }
