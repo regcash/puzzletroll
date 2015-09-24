@@ -4,10 +4,6 @@ angular.module('puzzleTroll', ['ui.router'])
 		$urlRouterProvider.otherwise('/login');
 
 		$stateProvider
-			.state('login', {
-				url : '/login',
-				templateUrl: 'login/login.html',
-			})
       .state('home', {
         url: '/home',
         templateUrl: 'home/home.html'
