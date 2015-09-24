@@ -29,8 +29,8 @@ app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'e
 
 app.get('/auth/google/callback',
             passport.authenticate('google', {
-                    successRedirect : '/',
-                    failureRedirect : '/login'
+                    successRedirect : '/#/home',
+                    failureRedirect : '/#/login'
             }));
 
 app.use('/api', router);
