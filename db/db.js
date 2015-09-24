@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
 
-var sequelize = new Sequelize('mysql://localhost:3306/puzzletrolldb');
+var sequelize = new Sequelize('puzzletrolldb', 'root', '');
 
 module.exports = sequelize;
