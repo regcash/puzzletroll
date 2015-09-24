@@ -7,11 +7,11 @@ var User = sequelize.define('User', {
   authoredChallenges: sequelize.INTEGER,
   solvedScore: sequelize.INTEGER,
   contributedScore: sequelize.INTEGER,
-  isMod: sequelize.BOOLEAN
+  isMod: sequelize.BIT
 });
 
 User.sync();
 
-User.hasMany(Challenge);
+User.belongsToMany(Challenge, { through: UserChallenges });
 
 module.exports = User;

@@ -11,6 +11,6 @@ var Challenge = sequelize.define('Challenge', {
 
 Challenge.sync();
 
-Challenge.hasMany(User);
+Challenge.belongsToMany(User, { through: UserChallenges });
 
 module.exports = Challenge;
