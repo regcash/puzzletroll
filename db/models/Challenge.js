@@ -1,7 +1,8 @@
-var sequelize = require('../db');
-var User = require('./User');
+var sequelize = require('sequelize');
+var db = require('../db');
 
-var Challenge = sequelize.define('Challenge', {
+
+var Challenge = db.define('Challenge', {
   name: sequelize.STRING,
   prompt: sequelize.STRING,
   answer: sequelize.STRING,
@@ -10,7 +11,5 @@ var Challenge = sequelize.define('Challenge', {
 });
 
 Challenge.sync();
-
-Challenge.belongsToMany(User, { through: UserChallenges });
 
 module.exports = Challenge;
