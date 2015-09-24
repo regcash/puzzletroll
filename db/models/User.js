@@ -1,4 +1,5 @@
 var sequelize = require('../db');
+var Challenge = require('./Challenge');
 
 var User = sequelize.define('User', {
   name: sequelize.STRING,
@@ -8,5 +9,7 @@ var User = sequelize.define('User', {
   contributedScore: sequelize.INTEGER,
   isMod: sequelize.BOOLEAN
 });
+
+User.hasMany(Challenge);
 
 module.exports = User;
