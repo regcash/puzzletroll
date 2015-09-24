@@ -8,5 +8,9 @@ angular.module('puzzleTroll', ['ui.router'])
 				url : '/login',
 				templateUrl: 'login/login.html',
 			})
+      .state('home', {
+        url: '/home',
+        templateUrl: 'home/home.html'
+      });
 
-	})
+	});
