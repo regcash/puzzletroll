@@ -2,10 +2,89 @@ var mysql = require('mysql');
 var request = require('request'); 
 var expect = require('../../node_modules/chai/chai').expect;
 var Promise = require('bluebird');
+var User = require('../../db/models/User.js');
+var app = require('../server.js');
+var supertest = require('supertest');
+var agent = supertest.agent(app);
 // var db = require('/../../db/queryHandler.js');
 
 describe("Puzzle Troll server spec", function() {
-  var dbConnection;
+
+  describe("Passport authentication", function(){
+    beforeEach(function(done) {
+      var user = new User({
+        name: 'test',
+        completedChallenges: 0,
+        authoredChallenges: 0,
+        solvedScore: 0,
+        contributedScore: 0,
+        isMod: false
+      });
+      user.save(done);
+    });
+
+
+    
+  })
+
+// var User, app, mongoose, request, server, should, user, agent;
+
+//   should   = require("should");
+//   app      = require("../server");
+//   mongoose = require("mongoose");
+//   User     = mongoose.model("User");
+//   request  = require("supertest");
+//   agent = request.agent(app)
+
+//   describe('User', function () {
+//     before(function(done) {
+//         user = new User({
+//           email    : "user@user.com",
+//           firstName: "Full Name",
+//           lastName : "Last Name",
+//           password : "pass11"
+//         });
+//         user.save(done)
+//       });
+//     describe('Login test', function () {
+//         it('should redirect to /', function (done) {
+//           agent
+//           .post('/users/session')
+//           .field('email', 'user@user.com')
+//           .field('password', 'pass11')
+//           .expect('Location','/')
+//           .end(done)
+//         })
+
+//     after(function(done) {
+//         User.remove().exec();
+//         return done();
+//       });
+
+//   })
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // beforeEach(function(done) {
     
@@ -25,119 +104,124 @@ describe("Puzzle Troll server spec", function() {
     // dbConnection.end();
 
   // });
+  describe('Server side api calls', function(){
 
-  it("Should get user from server", function(done) {
-    return new Promise(function(resolve, reject){
-      request({
-        method: 'get',
-        url: 'http://127.0.0.1:8080/api/users',
-        headers: {
-          'Content-Type' : 'application/json'
-        }
-      }, function (err, res, body) {
-          reject(err);
-          resolve(res, body);
-        }
-      );
-    })
-    .then(function(res, body){
-      expect(res).to.eql(200);
-      expect(body).to.be.an('object');
-    })
-    .catch(function(err){
-      expect(err).to.eql(null);
-    })
-    .finally(function(){
-      done();
-    })
-  });
 
-  it("Should get challenge from server", function(done) {
-    return new Promise(function(resolve, reject){
-      request({
-        method: 'get',
-        url: 'http://127.0.0.1:8080/api/challenges',
-        headers: {
-          'Content-Type' : 'application/json'
-        }
-      }, function (err, res, body) {
-          reject(err);
-          resolve(res, body);
-        }
-      );
-    })
-    .then(function(res, body){
-      expect(res).to.eql(200);
-      expect(body).to.be.an('object');
-    })
-    .catch(function(err){
-      expect(err).to.eql(null);
-    })
-    .finally(function(){
-      done();
-    })
-  });
 
-  it("Should post user to the server", function(done) {
-    return new Promise(function(resolve, reject){
-      request({
-        method: 'post',
-        url: 'http://127.0.0.1:8080/api/users',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        json: {
-          name: 'test user',
-          prompt: 'test prompt',
-          answer: 'test answer',
-          score:0,
-          difficulty: 0
-        }
-      }, function (err, res, body) {
-          reject(err);
-          resolve(res, body);
-        }
-      );
-    })
-    .then(function(res, body){
-      expect(res).to.eql(200);
-      expect(body).to.be.a('string');
-    })
-    .catch(function(err){
-      expect(err).to.eql(null);
-    })
-    .finally(function(){
-      done();
-    })
-  });
 
-  it("Should post challenge to the server", function(done) {
-    return new Promise(function(resolve, reject){
-      request({
-        method: 'post',
-        url: 'http://127.0.0.1:8080/api/challenges',
-        headers: {
-          'Content-Type' : 'application/json'
-        },
-        json: {
-          name: 'test user'
-        }
-      }, function (err, res, body) {
-          reject(err);
-          resolve(res, body);
-        }
-      );
-    })
-    .then(function(res, body){
-      expect(res).to.eql(200);
-      expect(body).to.be.a('string');
-    })
-    .catch(function(err){
-      expect(err).to.eql(null);
-    })
-    .finally(function(){
-      done();
-    })
+    it("Should get user from server", function(done) {
+      return new Promise(function(resolve, reject){
+        request({
+          method: 'get',
+          url: 'http://127.0.0.1:8080/api/users',
+          headers: {
+            'Content-Type' : 'application/json'
+          }
+        }, function (err, res, body) {
+            reject(err);
+            resolve(res, body);
+          }
+        );
+      })
+      .then(function(res, body){
+        expect(res).to.eql(200);
+        expect(body).to.be.an('object');
+      })
+      .catch(function(err){
+        expect(err).to.eql(null);
+      })
+      .finally(function(){
+        done();
+      })
+    });
+
+    it("Should get challenge from server", function(done) {
+      return new Promise(function(resolve, reject){
+        request({
+          method: 'get',
+          url: 'http://127.0.0.1:8080/api/challenges',
+          headers: {
+            'Content-Type' : 'application/json'
+          }
+        }, function (err, res, body) {
+            reject(err);
+            resolve(res, body);
+          }
+        );
+      })
+      .then(function(res, body){
+        expect(res).to.eql(200);
+        expect(body).to.be.an('object');
+      })
+      .catch(function(err){
+        expect(err).to.eql(null);
+      })
+      .finally(function(){
+        done();
+      })
+    });
+
+    it("Should post user to the server", function(done) {
+      return new Promise(function(resolve, reject){
+        request({
+          method: 'post',
+          url: 'http://127.0.0.1:8080/api/users',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          json: {
+            name: 'test user',
+            prompt: 'test prompt',
+            answer: 'test answer',
+            score:0,
+            difficulty: 0
+          }
+        }, function (err, res, body) {
+            reject(err);
+            resolve(res, body);
+          }
+        );
+      })
+      .then(function(res, body){
+        expect(res).to.eql(200);
+        expect(body).to.be.a('string');
+      })
+      .catch(function(err){
+        expect(err).to.eql(null);
+      })
+      .finally(function(){
+        done();
+      })
+    });
+
+    it("Should post challenge to the server", function(done) {
+      return new Promise(function(resolve, reject){
+        request({
+          method: 'post',
+          url: 'http://127.0.0.1:8080/api/challenges',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          json: {
+            name: 'test user'
+          }
+        }, function (err, res, body) {
+            reject(err);
+            resolve(res, body);
+          }
+        );
+      })
+      .then(function(res, body){
+        expect(res).to.eql(200);
+        expect(body).to.be.a('string');
+      })
+      .catch(function(err){
+        expect(err).to.eql(null);
+      })
+      .finally(function(){
+        done();
+      })
+    });
   });
 
 //   it("Should output all messages from the DB", function(done) {

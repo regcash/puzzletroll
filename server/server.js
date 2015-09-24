@@ -5,7 +5,9 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+
 var app = express();
+module.exports = app;
 
 // user morgan as a logger for debugging
 app.use(morgan('dev'));
