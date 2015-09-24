@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var request = require('request'); // You might need to npm install the request module!
+var request = require('request'); 
 var expect = require('../../node_modules/chai/chai').expect;
 var Promise = require('bluebird');
 // var db = require('/../../db/queryHandler.js');
@@ -51,6 +51,7 @@ describe("Puzzle Troll server spec", function() {
       done();
     })
   });
+
   it("Should get challenge from server", function(done) {
     return new Promise(function(resolve, reject){
       request({
@@ -68,6 +69,68 @@ describe("Puzzle Troll server spec", function() {
     .then(function(res, body){
       expect(res).to.eql(200);
       expect(body).to.be.an('object');
+    })
+    .catch(function(err){
+      expect(err).to.eql(null);
+    })
+    .finally(function(){
+      done();
+    })
+  });
+
+  it("Should post user to the server", function(done) {
+    return new Promise(function(resolve, reject){
+      request({
+        method: 'post',
+        url: 'http://127.0.0.1:8080/api/users',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        json: {
+          name: 'test user',
+          prompt: 'test prompt',
+          answer: 'test answer',
+          score:0,
+          difficulty: 0
+        }
+      }, function (err, res, body) {
+          reject(err);
+          resolve(res, body);
+        }
+      );
+    })
+    .then(function(res, body){
+      expect(res).to.eql(200);
+      expect(body).to.be.a('string');
+    })
+    .catch(function(err){
+      expect(err).to.eql(null);
+    })
+    .finally(function(){
+      done();
+    })
+  });
+
+  it("Should post challenge to the server", function(done) {
+    return new Promise(function(resolve, reject){
+      request({
+        method: 'post',
+        url: 'http://127.0.0.1:8080/api/challenges',
+        headers: {
+          'Content-Type' : 'application/json'
+        },
+        json: {
+          name: 'test user'
+        }
+      }, function (err, res, body) {
+          reject(err);
+          resolve(res, body);
+        }
+      );
+    })
+    .then(function(res, body){
+      expect(res).to.eql(200);
+      expect(body).to.be.a('string');
     })
     .catch(function(err){
       expect(err).to.eql(null);
