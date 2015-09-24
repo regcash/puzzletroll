@@ -1,5 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var configAuth = require('../server/config/auth');
+var query = require('../db/queryHandler');
 
 var User = require('../db/models/User');
 
@@ -10,7 +11,7 @@ module.exports = function(passport){
   });
 
   passport.deserializeUser(function(id, done){
-    User.findById(id, function(err, user){
+    query.findUserById(id, function(err, user){
       done(err, user);
     });
   });
@@ -26,7 +27,7 @@ module.exports = function(passport){
 
     process.nextTick(function(){
 
-      User.findOne({ 'google.id' : profile.id }, function(err,user){
+      query.findUser({ 'google.id' : profile.id }, function(err,user){
         if(err){
           return done(err);
         }
@@ -35,10 +36,10 @@ module.exports = function(passport){
         }else{
           var newUser = new User();
 
-          newUser.google.id = profile.id;
-          newUser.google.token = token;
-          newUser.google.name = profile.displayName;
-          newUser.google.email = profile.emails[0].value;
+          newUser.googleId = profile.id;
+          newUser.googleToken = token;
+          newUser.name = profile.displayName;
+          newUser.email = profile.emails[0].value;
 
           newUser.save(function(err){
             if(err){
