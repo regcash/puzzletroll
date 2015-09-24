@@ -11,6 +11,8 @@ var agent = supertest.agent(app);
 describe("Puzzle Troll server spec", function() {
 
   describe("Passport authentication", function(){
+
+
     beforeEach(function(done) {
       var user = new User({
         name: 'test',
@@ -23,6 +25,12 @@ describe("Puzzle Troll server spec", function() {
       user.save(done);
     });
 
+    it('Should login user', function(){
+      agent
+        .post('/users/session')
+        .field('name', )
+
+    })
 
     
   })
