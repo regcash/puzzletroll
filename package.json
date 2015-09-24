@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/ryanwholey/puzzletroll#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "passport-google-oauth2": "^0.1.6"
   },
   "devDependencies": {
     "grunt": "^0.4.5"
