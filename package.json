@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/ryanwholey/puzzletroll#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "express-session": "^1.11.3"
   },
   "devDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "nodemon": "^1.7.0"
   }
 }
