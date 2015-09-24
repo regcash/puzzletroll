@@ -9,6 +9,8 @@ var Challenge = sequelize.define('Challenge', {
   difficulty: sequelize.INTEGER
 });
 
+Challenge.sync();
+
 Challenge.hasMany(User);
 
 module.exports = Challenge;
