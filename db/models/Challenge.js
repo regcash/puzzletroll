@@ -1,7 +1,6 @@
 var sequelize = require('sequelize');
 var db = require('../db');
 
-
 var Challenge = db.define('Challenge', {
   name: sequelize.STRING,
   prompt: sequelize.STRING,

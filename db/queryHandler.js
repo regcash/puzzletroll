@@ -3,57 +3,61 @@ var User = require('./models/User');
 var Challenge = require('./models/Challenge');
 
 module.exports.getUsers = function() {
-  User.findAll({});
+  return User.findAll({});
 }
 
 module.exports.getChallenges = function() {
-  Challenge.findAll({});
+  return Challenge.findAll({});
 }
 
-module.exports.findUser = function(user)  {
-  User.findOne({
-    where: {
-      name: user
-    }
+module.exports.findUser = function(where)  {
+  return User.findOne({
+    where: where
   });
 }
 
 module.exports.findChallenge = function(challenge)  {
-  Challenge.findOne({
+   return Challenge.findOne({
     where: {
       name: challenge
     }
   })
 }
 
-module.exports.findUserById = function(id)  {
-  User.findOne({
+module.exports.findUserSolvedChallenges = function(user)  {
+  return Challenge.findAll({
     where: {
-      id: id
+      id: UserChallenges.findAll({
+        UserId: user.id;
+      });
     }
   });
 }
 
-module.exports.findUserSolvedChallenges = function(user)  {
-}
-
 module.exports.ChallengeSolvedUsers = function(challenge) {
+  return User.findAll({
+    where: {
+      id: UserChallenges.findAll({
+        ChallengeId: challenge.id;
+      });
+    }
+  });
 }
 
 module.exports.createUser = function(user)  {
-  User.create({
+  return User.create({
     name: user.userName,
     completedChallenges: 0,
     authoredChallenges: 0,
     solvedScore: 0,
     contributedScore: 0,
     isMod: false
-
   });
 }
 
+
 module.exports.createChallenge = function(challenge)  {
-  Challenge.create({
+  return Challenge.create({
     name: challenge.name,
     prompt: challenge.prompt,
     answer: challenge.answer,
@@ -63,7 +67,7 @@ module.exports.createChallenge = function(challenge)  {
 }
 
 module.exports.removeUser = function(user)  {
-  User.findOne({
+  return User.findOne({
     where: {
       name: user
     }
@@ -71,7 +75,7 @@ module.exports.removeUser = function(user)  {
 }
 
 module.exports.removeChallenge = function(challenge)  {
-  Challenge.findOne({
+  return Challenge.findOne({
     where: {
       name: challenge
     }
