@@ -4,7 +4,8 @@
   "description": "cache puzzles throughout the internet",
   "main": "server/server.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
