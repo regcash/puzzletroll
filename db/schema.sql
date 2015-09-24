@@ -5,7 +5,7 @@ USE puzzletrolldb;
 CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
   name varChar(25),
-  email varChar(25),
+  email varChar(50),
   authoredChallenges int,
   completedChallenges int,
   solvedScore int,
@@ -13,6 +13,8 @@ CREATE TABLE users (
   isMod bit NOT NULL,
   googleId varChar(25),
   googleToken varChar(80),
+  createdAt datetime,
+  updatedAt datetime,
   PRIMARY KEY (ID)
 );
 

@@ -28,8 +28,8 @@ module.exports.findUserSolvedChallenges = function(user)  {
   return Challenge.findAll({
     where: {
       id: UserChallenges.findAll({
-        UserId: user.id;
-      });
+        UserId: user.id
+      })
     }
   });
 }
@@ -38,20 +38,23 @@ module.exports.ChallengeSolvedUsers = function(challenge) {
   return User.findAll({
     where: {
       id: UserChallenges.findAll({
-        ChallengeId: challenge.id;
-      });
+        ChallengeId: challenge.id
+      })
     }
   });
 }
 
 module.exports.createUser = function(user)  {
   return User.create({
-    name: user.userName,
+    name: user.name,
+    email: user.email,
     completedChallenges: 0,
     authoredChallenges: 0,
     solvedScore: 0,
     contributedScore: 0,
-    isMod: false
+    isMod: false,
+    googleId: user.googleId,
+    googleToken: user.googleToken
   });
 }
 
