@@ -3,6 +3,7 @@ var handler = require('./handler');
 module.exports = function (req, res, next){
 	res.set(defaultCorsHeaders);
 	var route = req.url.substring(1);
+
 	//if not valid, send back redirect
 	if(!isValidRoute(route)){
 		res.status(300).redirect('/');
@@ -36,7 +37,7 @@ var defaultCorsHeaders = {
 };
 
 //check to see if api/____ is valid route
-var routes = ['challenges, users'];
+var routes = ['challenges, users', 'google'];
 
 var isValidRoute = function (route) {
 	var found = false;
