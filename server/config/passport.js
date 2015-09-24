@@ -27,26 +27,17 @@ module.exports = function(passport){
 
     process.nextTick(function(){
 
-      query.findUser({ 'google.id' : profile.id }, function(err,user){
-        if(err){
-          return done(err);
-        }
+      query.findUser({ 'googleId' : profile.id }).then(function(user){
         if(user){
           return done(null, user);
         }else{
-          var newUser = new User();
-
+          var newUser = {};
           newUser.googleId = profile.id;
           newUser.googleToken = token;
           newUser.name = profile.displayName;
           newUser.email = profile.emails[0].value;
 
-          newUser.save(function(err){
-            if(err){
-              throw err;
-            }
-            return done(null, newUser);
-          });
+          query.createUser(newUser).then( done(null, newUser) );
         }
       });
     });
