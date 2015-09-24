@@ -32,4 +32,12 @@ module.exports.findUserSolvedChallenges = function(user)  {
 
 module.exports.ChallengeSolvedUsers = function(challenge) {
 
+}
+
+module.exports.createUser = function(user)  {
+
+}
+
+module.exports.createChallenge = function(challenge)  {
+  
 }  
