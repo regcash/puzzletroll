@@ -7,6 +7,10 @@ angular.module('puzzleTroll', ['ui.router'])
       .state('home', {
         url: '/home',
         templateUrl: 'home/home.html'
-      });
+      })
+        .state('comments', {
+          url: '/comments',
+          templateUrl: 'home/home.comments.html'
+        });
 
 	});
