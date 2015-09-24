@@ -20,6 +20,8 @@ app.use(session({
 
 app.use('/', express.static(__dirname + '/../client/'));
 
+app.use('/auth', router)
+
 app.use('/api', router);
 
 app.listen(process.env.PORT || 8080);
