@@ -1,3 +1,4 @@
+var passport = require('passport');
 
 module.exports = {
 //handle users requests
@@ -20,15 +21,6 @@ module.exports = {
 		post : function (req, res, next) {
 			console.log('challenges post');
 			res.send();
-		}
-	},
-	//handle google authentication requests
-	google : {
-		get : function(req, res, next) {
-
-		},
-		post : function(req, res, next) {
-
 		}
 	}
 

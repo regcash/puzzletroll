@@ -3,6 +3,7 @@ var router = require('./router');
 var session = require('express-session');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 
 var app = express();
 
@@ -10,6 +11,10 @@ var app = express();
 app.use(morgan('dev'));
 
 app.use(bodyParser.json());
+require('../server/config/passport')(passport);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(session({
 	secret: 'supersecretsecretcode',
@@ -20,7 +25,13 @@ app.use(session({
 
 app.use('/', express.static(__dirname + '/../client/'));
 
-app.use('/auth', router)
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+app.get('/auth/google/callback',
+            passport.authenticate('google', {
+                    successRedirect : '/',
+                    failureRedirect : '/login'
+            }));
 
 app.use('/api', router);
 
