@@ -29,5 +29,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('pull', function() {
+  	shell.exec('git pull upstream master');
+  	shell.exec('npm install');
+  	shell.exec('bower install');
+	});
 
 };
