@@ -26,6 +26,10 @@ module.exports.findChallenge = function(challenge)  {
   })
 }
 
+module.exports.findUserById = function(id)  {
+  
+}
+
 module.exports.findUserSolvedChallenges = function(user)  {
 
 }
@@ -35,9 +39,24 @@ module.exports.ChallengeSolvedUsers = function(challenge) {
 }
 
 module.exports.createUser = function(user)  {
+  User.create({
+    name: user.userName,
+    completedChallenges: 0,
+    authoredChallenges: 0,
+    solvedScore: 0,
+    contributedScore: 0,
+    isMod: false
 
+  });
 }
 
 module.exports.createChallenge = function(challenge)  {
-  
-}  
+  Challenge.create({
+    name: challenge.name,
+    prompt: challenge.prompt,
+    answer: challenge.answer,
+    score: challenge.score,
+    difficulty: challenge.difficulty
+  });
+}
+ 
