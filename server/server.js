@@ -1,14 +1,13 @@
 var express = require('express');
 var router = require('./router');
-var session = require('express-session')
-var session = require('express-session')
+var session = require('express-session');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 
 var app = express();
 
 // user morgan as a logger for debugging
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 app.use(bodyParser.json());
 

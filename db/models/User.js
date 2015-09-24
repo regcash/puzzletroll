@@ -10,6 +10,8 @@ var User = sequelize.define('User', {
   isMod: sequelize.BOOLEAN
 });
 
+User.sync();
+
 User.hasMany(Challenge);
 
 module.exports = User;
