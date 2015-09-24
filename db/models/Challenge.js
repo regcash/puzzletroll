@@ -1,4 +1,5 @@
 var sequelize = require('../db');
+var User = require('./User');
 
 var Challenge = sequelize.define('Challenge', {
   prompt: sequelize.STRING,
@@ -6,5 +7,7 @@ var Challenge = sequelize.define('Challenge', {
   score: sequelize.INTEGER,
   difficulty: sequelize.INTEGER
 });
+
+Challenge.hasMany(User);
 
 module.exports = Challenge;
