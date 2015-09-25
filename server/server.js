@@ -19,21 +19,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(session({
-	secret: 'supersecretsecretcode',
+  secret: 'supersecretsecretcode',
   resave: false,
   saveUninitialized: true,
   cookie: { }
 }));
 
-app.use('/', express.static(__dirname + '/../client/'));
+app.use(express.static(__dirname + '/../client/'));
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
             passport.authenticate('google', {
-                    successRedirect : '/#/home',
-                    failureRedirect : '/#/login'
+                    successRedirect : '/home',
+                    failureRedirect : '/login'
             }));
+
+app.get('/home', function(req,res,next){
+  res.sendFile('home.html', {root: __dirname + '/../client/home/'});
+});
 
 app.use('/api', router);
 
