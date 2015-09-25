@@ -50,6 +50,9 @@ module.exports = {
 					res.send('Challenge failed to post: ', err);
 				});
 		}
+	},
+	messages : {
+		
 	}
 
 };
