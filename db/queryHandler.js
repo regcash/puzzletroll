@@ -16,11 +16,9 @@ module.exports.findUser = function(where)  {
   });
 }
 
-module.exports.findChallenge = function(challenge)  {
+module.exports.findChallenge = function(where)  {
    return Challenge.findOne({
-    where: {
-      name: challenge
-    }
+    where: where
   })
 }
 
@@ -46,14 +44,15 @@ module.exports.ChallengeSolvedUsers = function(challenge) {
 
 module.exports.createUser = function(user)  {
   return User.create({
-    name: user.userName,
+    name: user.name,
+    email: user.email,
     completedChallenges: 0,
     authoredChallenges: 0,
     solvedScore: 0,
     contributedScore: 0,
-    isMod: false
-  }).then(function(user)  {
-    return user;
+    isMod: false,
+    googleId: user.googleId,
+    googleToken: user.googleToken
   });
 }
 
@@ -71,16 +70,20 @@ module.exports.createChallenge = function(challenge)  {
 module.exports.removeUser = function(user)  {
   return User.findOne({
     where: {
-      name: user
+      name: user.name
     }
-  }).destroy();
+  }).then(function(user)  {
+    user.destroy();
+  });
 }
 
 module.exports.removeChallenge = function(challenge)  {
   return Challenge.findOne({
     where: {
-      name: challenge
+      name: challenge.name
     }
-  }).destroy();
+  }).then(function(challenge) {
+    challenge.destroy();
+  })
 }
  

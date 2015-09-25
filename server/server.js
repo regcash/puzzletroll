@@ -5,7 +5,9 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+
 var app = express();
+module.exports = app;
 
 // user morgan as a logger for debugging
 app.use(morgan('dev'));
@@ -29,8 +31,8 @@ app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'e
 
 app.get('/auth/google/callback',
             passport.authenticate('google', {
-                    successRedirect : '/',
-                    failureRedirect : '/login'
+                    successRedirect : '/#/home',
+                    failureRedirect : '/#/login'
             }));
 
 app.use('/api', router);
