@@ -7,12 +7,12 @@ var User = require('../../db/models/User');
 module.exports = function(passport){
 
   passport.serializeUser(function(user, done){
-    done(null,user.id);
+    done(null,user.googleId);
   });
 
   passport.deserializeUser(function(id, done){
-    query.findUser({ id: id }).then(function(user){
-      done(null, user);
+    query.findUser({googleId: id}).then(function(err, user){
+      done(err, user);
     });
   });
 
