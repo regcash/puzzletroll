@@ -67,6 +67,26 @@ module.exports.createChallenge = function(challenge)  {
   });
 }
 
+module.exports.addChallengeComplete = function(user, challenge)  {
+  User.findOne({
+    where: {
+      name: user.name
+    }
+  }).then(function(user)  {
+    user.addChallenge(challenge);
+  });
+}
+
+module.exports.addNewUserCompleted = function(user, challenge)  {
+  Challenge.findOne({
+    where: {
+      name: challenge.name
+    }
+  }).then(function(challenge)  {
+    challenge.addUser(user);
+  });
+}
+
 module.exports.removeUser = function(user)  {
   return User.findOne({
     where: {
@@ -80,7 +100,7 @@ module.exports.removeUser = function(user)  {
 module.exports.removeChallenge = function(challenge)  {
   return Challenge.findOne({
     where: {
-      name: challenge.name
+      name: challenge
     }
   }).then(function(challenge) {
     challenge.destroy();
