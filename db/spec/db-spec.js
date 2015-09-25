@@ -42,6 +42,29 @@ describe("Puzzle Troll DB Spec", function() {
     })
   });
 
+  it("Should add a completed challenge for the user", function()  {
+    query.addChallengeCompleted({name: lol}, {
+      name: 'lol',
+      prompt: 'dsfjls;kd',
+      answer: 'kekles',
+      score: 100,
+      difficulty: 100
+    });
+    expect().to.eql();
+  });
+
+  it("Should add a new user completion for the challenge", function() {
+    query.addNewUserCompleted({name: lol}, {
+      name: 'lol',
+      prompt: 'dsfjls;kd',
+      answer: 'kekles',
+      score: 100,
+      difficulty: 100
+    });
+    expect().to.eql();
+
+  });
+
   it("Should find all challenges solved by a specifed user", function() {
 
   });
