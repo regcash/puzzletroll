@@ -25,7 +25,7 @@ module.exports.findChallenge = function(where)  {
 module.exports.findUserSolvedChallenges = function(user)  {
   return Challenge.findAll({
     where: {
-      id: UserChallenges.findAll({
+      id: UserChallenge.findAll({
         UserId: user.id
       })
     }
@@ -35,7 +35,7 @@ module.exports.findUserSolvedChallenges = function(user)  {
 module.exports.ChallengeSolvedUsers = function(challenge) {
   return User.findAll({
     where: {
-      id: UserChallenges.findAll({
+      id: UserChallenge.findAll({
         ChallengeId: challenge.id
       })
     }
