@@ -140,7 +140,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
 
     it("Should get challenge from server", function(done) {
@@ -166,7 +166,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
 
     it("Should post user to the server", function(done) {
@@ -199,7 +199,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
 
     it("Should post challenge to the server", function(done) {
@@ -228,7 +228,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
   });
 
