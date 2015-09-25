@@ -4,45 +4,43 @@ var Challenge = require('./models/Challenge');
 
 module.exports.getUsers = function() {
   return User.findAll({});
-}
+};
 
 module.exports.getChallenges = function() {
   return Challenge.findAll({});
-}
+};
 
 module.exports.findUser = function(where)  {
   return User.findOne({
     where: where
   });
-}
+};
 
-module.exports.findChallenge = function(challenge)  {
+module.exports.findChallenge = function(where)  {
    return Challenge.findOne({
-    where: {
-      name: challenge
-    }
-  })
-}
+    where: where
+  });
+};
 
 module.exports.findUserSolvedChallenges = function(user)  {
   return Challenge.findAll({
     where: {
-      id: UserChallenges.findAll({
+      id: UserChallenge.findAll({
         UserId: user.id
       })
     }
   });
-}
+};
 
 module.exports.ChallengeSolvedUsers = function(challenge) {
   return User.findAll({
     where: {
-      id: UserChallenges.findAll({
+      id: UserChallenge.findAll({
         ChallengeId: challenge.id
       })
     }
   });
-}
+};
 
 module.exports.createUser = function(user)  {
   return User.create({
@@ -56,7 +54,7 @@ module.exports.createUser = function(user)  {
     googleId: user.googleId,
     googleToken: user.googleToken
   });
-}
+};
 
 
 module.exports.createChallenge = function(challenge)  {
@@ -67,21 +65,42 @@ module.exports.createChallenge = function(challenge)  {
     score: challenge.score,
     difficulty: challenge.difficulty
   });
-}
+};
+
+module.exports.addChallengeCompleted = function(user, challenge)  {
+  User.findOne({
+    where: {
+      name: user.name
+    }
+  }).then(function(user)  {
+    user.addChallenge(challenge);
+  });
+
+  Challenge.findOne({
+    where: {
+      name: challenge.name
+    }
+  }).then(function(challenge)  {
+    challenge.addUser(user);
+  });
+};
 
 module.exports.removeUser = function(user)  {
   return User.findOne({
     where: {
-      name: user
+      name: user.name
     }
-  }).destroy();
-}
+  }).then(function(user)  {
+    user.destroy();
+  });
+};
 
 module.exports.removeChallenge = function(challenge)  {
   return Challenge.findOne({
     where: {
-      name: challenge
+      name: challenge.name
     }
-  }).destroy();
-}
- 
+  }).then(function(challenge) {
+    challenge.destroy();
+  });
+};

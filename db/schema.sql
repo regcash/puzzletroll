@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS challenges (
   prompt varchar(500),
   answer varchar(255),
   score int,
-  dificulty int,
+  difficulty int,
   PRIMARY KEY (ID)
 );
-

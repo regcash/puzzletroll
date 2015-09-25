@@ -10,30 +10,30 @@ var agent = supertest.agent(app);
 
 describe("Puzzle Troll server spec", function() {
 
-  describe("Passport authentication", function(){
+  // describe("Passport authentication", function(){
 
 
-    beforeEach(function(done) {
-      var user = new User({
-        name: 'test',
-        completedChallenges: 0,
-        authoredChallenges: 0,
-        solvedScore: 0,
-        contributedScore: 0,
-        isMod: false
-      });
-      user.save(done);
-    });
+  //   beforeEach(function(done) {
+  //     var user = new User({
+  //       name: 'test',
+  //       completedChallenges: 0,
+  //       authoredChallenges: 0,
+  //       solvedScore: 0,
+  //       contributedScore: 0,
+  //       isMod: false
+  //     });
+  //     user.save(done);
+  //   });
 
-    it('Should login user', function(){
-      agent
-        .post('/users/session')
-        .field('name', )
+  //   // it('Should login user', function(){
+  //   //   agent
+  //   //     .post('/users/session')
+  //   //     .field('name', )
 
-    })
+  //   // })
 
     
-  })
+  // })
 
 // var User, app, mongoose, request, server, should, user, agent;
 
@@ -140,7 +140,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
 
     it("Should get challenge from server", function(done) {
@@ -166,7 +166,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
 
     it("Should post user to the server", function(done) {
@@ -199,7 +199,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
 
     it("Should post challenge to the server", function(done) {
@@ -228,7 +228,7 @@ describe("Puzzle Troll server spec", function() {
       })
       .finally(function(){
         done();
-      })
+      });
     });
   });
 
