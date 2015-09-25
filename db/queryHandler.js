@@ -67,7 +67,7 @@ module.exports.createChallenge = function(challenge)  {
   });
 }
 
-module.exports.addChallengeComplete = function(user, challenge)  {
+module.exports.addChallengeCompleted = function(user, challenge)  {
   User.findOne({
     where: {
       name: user.name
@@ -75,9 +75,7 @@ module.exports.addChallengeComplete = function(user, challenge)  {
   }).then(function(user)  {
     user.addChallenge(challenge);
   });
-}
 
-module.exports.addNewUserCompleted = function(user, challenge)  {
   Challenge.findOne({
     where: {
       name: challenge.name
@@ -100,7 +98,7 @@ module.exports.removeUser = function(user)  {
 module.exports.removeChallenge = function(challenge)  {
   return Challenge.findOne({
     where: {
-      name: challenge
+      name: challenge.name
     }
   }).then(function(challenge) {
     challenge.destroy();
