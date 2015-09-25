@@ -27,4 +27,3 @@ CREATE TABLE IF NOT EXISTS challenges (
   difficulty int,
   PRIMARY KEY (ID)
 );
-
