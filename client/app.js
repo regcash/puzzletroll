@@ -1,6 +1,11 @@
-angular.module('puzzleTroll', ['ui.router', 'puzzleTroll.listModule', 'puzzleTroll.userModule'])
+angular.module('puzzleTroll', [
+  'ui.router', 
+  'puzzleTroll.listModule', 
+  'puzzleTroll.MessageModule', 
+  'puzzleTroll.Util',
+  'puzzleTroll.userModule'])
 	.config(function ($stateProvider, $urlRouterProvider) {
-		// $urlRouterProvider.otherwise('/login');
+		$urlRouterProvider.otherwise('/');
 		$stateProvider
       .state('home', {
         url: '/',
