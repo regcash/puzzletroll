@@ -10,6 +10,10 @@ module.exports.getChallenges = function() {
   return Challenge.findAll({});
 };
 
+module.exports.getMessages = function () {
+  return Message.findAll({});
+};
+
 module.exports.findUser = function(where)  {
   return User.findOne({
     where: where

@@ -1,4 +1,4 @@
 angular.module('puzzleTroll.listModule', [])
-.controller('listController', function () {
+  .controller('listController', function () {
 
-});
+  });
