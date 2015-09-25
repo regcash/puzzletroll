@@ -25,12 +25,12 @@ describe("Puzzle Troll server spec", function() {
       user.save(done);
     });
 
-    it('Should login user', function(){
-      agent
-        .post('/users/session')
-        .field('name', )
+    // it('Should login user', function(){
+    //   agent
+    //     .post('/users/session')
+    //     .field('name', )
 
-    })
+    // })
 
     
   })
