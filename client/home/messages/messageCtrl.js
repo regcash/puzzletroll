@@ -3,8 +3,13 @@ angular.module('puzzleTroll.MessageModule', ['puzzleTroll.Util'])
   	$scope.getMessages = function(){
 	   	http.get('messages')
 	   		.then(function(messages){
-	   			$scope = messages;
-	   		});
+	   			console.log(messages);
+	   			$scope.messages = messages;
+	   		})
+	   		.catch(function(err){
+	   			console.log('error', err);
+	   			$scope.messages = err;
+	   		})
   	};
   	$scope.getMessages();
   })
