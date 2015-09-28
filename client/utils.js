@@ -1,5 +1,5 @@
 angular.module('puzzleTroll.Util', [])
-  .factory('http', function ($http) {
+  .factory('reqUtil', function ($http) {
 
     var get = function(route){
       console.log('http://127.0.0.1:8080/api/'+route);
