@@ -6,7 +6,7 @@ module.exports = function (req, res, next){
 
 	//if not valid, send back redirect
 	if(!isValidRoute(route)){
-		res.status(300).redirect('/');
+		res.redirect('/');
 	}
 	switch(req.method){
 		case 'GET':
@@ -20,11 +20,11 @@ module.exports = function (req, res, next){
 			handler[route].post(req, res, next);
 			break;
 		case 'OPTIONS':
-			res.set(200).send('okay to continue!');
+			res.send('okay to continue!');
 			break;
 		//if anything else, redirect to 
 		default:
-			res.status(300).redirect('/');
+			res.redirect('/');
 	}
 };
 

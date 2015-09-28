@@ -7,7 +7,7 @@ module.exports = {
 	users : {
 		get : function (req, res, next) {
 			console.log('user get');
-			res.status(200);
+			
 			query.getUsers()
 				.then(function(data){
 					res.send(data);
@@ -19,7 +19,7 @@ module.exports = {
 		post : function (req, res, next)	{
 			// authentication takes care of all user posting to db
 			console.log('user post');
-			res.status(300);
+			
 			res.send('user posting handled by Oauth')
 			// res.redirect('/');
 		}
@@ -29,7 +29,7 @@ module.exports = {
 	challenges : {
 		get : function (req, res, next) {
 			console.log('challenges get');
-			res.status(200);
+			
 			query.getChallenges()
 				.then(function(data){
 					res.send(data);
@@ -41,7 +41,7 @@ module.exports = {
 		},
 		post : function (req, res, next) {
 			console.log('challenges post');
-			res.status(201);
+			
 			query.createChallenge(req.body)
 				.then(function(){
 					res.send('Challenge posted successfully!')
@@ -51,8 +51,29 @@ module.exports = {
 				});
 		}
 	},
+
+	//handle requests for messages
 	messages : {
-		
+		get : function (req, res, next) {
+			console.log('messages get');
+			query.getMessages()
+				.then(function(data){
+					res.send(data);
+				})
+				.catch(function(err){
+					console.error('error in get messages handler', err);
+				})
+		},
+		post : function (req, res, next) {
+			console.log('messages post');
+			query.postMessage(message)
+				.then(function(response){
+					res.send(response);
+				})
+				.catch(function(err){
+					console.error(err);
+				});
+		}
 	}
 
 };
