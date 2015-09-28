@@ -47,7 +47,7 @@ module.exports = {
 			
 			query.createChallenge(req.body)
 				.then(function(){
-					res.send('Challenge posted successfully!')
+					res.send('Challenge posted successfully!');
 				})
 				.catch(function(err){
 					res.send('Challenge failed to post: ', err);
@@ -58,13 +58,13 @@ module.exports = {
 	//handle requests for messages
 	messages : {
 		get : function (req, res, next) {
-			console.log('messages get');
+			console.log(req.url);
 		
 			return query.getMessages()
 				.then(function(data){
-					var data = data[0].dataValues;
+					
 					console.log(data);
-					// res.send(data);
+					res.send(data);
 				})
 				.catch(function(err){
 					console.error('messages get error: ', err);

@@ -1,5 +1,5 @@
 angular.module('puzzleTroll.Util', [])
-  .factory('http', function ($http) {
+  .factory('reqUtil', function ($http) {
 
     var get = function(route){
 
