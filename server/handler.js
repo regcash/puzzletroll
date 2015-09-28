@@ -14,14 +14,15 @@ module.exports = {
 				})
 				.catch(function(err){
 					console.error('Get users error: ', err);
+					res.send();
 				});
 		},
 		post : function (req, res, next)	{
 			// authentication takes care of all user posting to db
 			console.log('user post');
 			
-			res.send('user posting handled by Oauth')
-			// res.redirect('/');
+			// res.send('user posting handled by Oauth')
+			res.redirect('/');
 		}
 	},
 	
@@ -32,10 +33,12 @@ module.exports = {
 			
 			query.getChallenges()
 				.then(function(data){
+					console.log('challenges data',data);
 					res.send(data);
 				})
 				.catch(function(err){
 					console.log('Get challenges error: ', err);
+					res.send();
 				});
 
 		},
@@ -56,19 +59,22 @@ module.exports = {
 	messages : {
 		get : function (req, res, next) {
 			console.log('messages get');
-			query.getMessages()
+		
+			return query.getMessages()
 				.then(function(data){
-					res.send(data);
+					var data = data[0].dataValues;
+					console.log(data);
+					// res.send(data);
 				})
 				.catch(function(err){
-					console.error('error in get messages handler', err);
-				})
+					console.error('messages get error: ', err);
+				});
 		},
 		post : function (req, res, next) {
 			console.log('messages post');
 			query.postMessage(message)
 				.then(function(response){
-					res.send(response);
+					// res.send(response);
 				})
 				.catch(function(err){
 					console.error(err);
