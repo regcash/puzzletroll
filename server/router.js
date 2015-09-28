@@ -5,9 +5,9 @@ module.exports = function (req, res, next){
 	var route = req.url.substring(1);
 
 	//if not valid, send back redirect
-	if(!isValidRoute(route)){
-		res.redirect('/');
-	}
+	// if(!isValidRoute(route)){
+	// 	res.redirect('/');
+	// }
 	switch(req.method){
 		case 'GET':
 			handler[route].get(req, res, next);
