@@ -1,7 +1,7 @@
 var handler = require('./handler');
 
 module.exports = function (req, res, next){
-	res.set(defaultCorsHeaders);
+	// res.set(defaultCorsHeaders);
 	var route = req.url.substring(1);
 
 	//if not valid, send back redirect
@@ -23,8 +23,8 @@ module.exports = function (req, res, next){
 			res.send('okay to continue!');
 			break;
 		//if anything else, redirect to 
-		default:
-			res.redirect('/');
+		// default:
+		// 	res.redirect('/');
 	}
 };
 
