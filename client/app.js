@@ -1,6 +1,7 @@
 angular.module('puzzleTroll', [
   'ui.router', 
   'puzzleTroll.listModule', 
+  'puzzleTroll.challengeModule',
   'puzzleTroll.MessageModule', 
   'puzzleTroll.Util',
   'puzzleTroll.userModule'])
@@ -19,6 +20,9 @@ angular.module('puzzleTroll', [
         url: '/users/:user',
         templateUrl: 'user/userView.html'
       })
+      .state('challenges', {
+        url: 'challenges/:name',
+        templateUrl: 'challengeView.html'
+      })
       //putting here temporarily, will make more localized to each challenge later
-      
 	});
