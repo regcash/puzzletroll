@@ -5,7 +5,7 @@ angular.module('puzzleTroll', [
   'puzzleTroll.Util',
   'puzzleTroll.userModule'])
 	.config(function ($stateProvider, $urlRouterProvider) {
-		$urlRouterProvider.otherwise('/');
+		// $urlRouterProvider.otherwise('/');
 		$stateProvider
       .state('home', {
         url: '/',
@@ -16,7 +16,7 @@ angular.module('puzzleTroll', [
         templateUrl: 'messages/message.html'
       })
       .state('user', {
-        url: '/:user',
+        url: '/users/:user',
         templateUrl: 'user/userView.html'
       })
       //putting here temporarily, will make more localized to each challenge later
