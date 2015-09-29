@@ -15,9 +15,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 require('../server/config/passport')(passport);
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(session({
   secret: 'supersecretsecretcode',
   resave: false,
@@ -25,20 +22,31 @@ app.use(session({
   cookie: { }
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+var isLoggedIn = function(req,res,next){
+  console.log(req.isAuthenticated());
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/');
+}
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
             passport.authenticate('google', {
                     successRedirect : '/home/',
-                    failureRedirect : '/login'
+                    failureRedirect : '/'
             }));
 
-app.get('/home', function(req,res,next){
+app.get('/home', isLoggedIn, function(req,res,next){
   res.sendFile('home.html', {root: __dirname + '/../client/home/'});
 });
 
-app.use('/api', router);
+app.use('/api', isLoggedIn, router);
 
 app.use(express.static(__dirname + '/../client/'));
 app.listen(process.env.PORT || 8080);
+

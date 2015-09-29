@@ -38,7 +38,7 @@ var defaultCorsHeaders = {
 };
 
 //check to see if api/____ is valid route
-var routes = ['challenges, users', 'google'];
+var routes = ['challenges', 'users', 'google'];
 
 var isValidRoute = function (route) {
 	var found = false;
