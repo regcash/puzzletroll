@@ -7,8 +7,19 @@ module.exports = {
 	users : {
 		get : function (req, res, next) {
 			console.log('user get');
-			
-			query.getUsers()
+			var params = req.url.substring(1).split('/')
+			console.log(params);
+			if(params[1]){
+				query.findUser({name: params[1]})
+					.then(function(data){
+						res.send(data);
+					})
+					.catch(function(err){
+						console.error(err);
+						res.send();
+					})
+			}else{
+				query.getUsers()
 				.then(function(data){
 					res.send(data);
 				})
@@ -16,6 +27,9 @@ module.exports = {
 					console.error('Get users error: ', err);
 					res.send();
 				});
+			}
+			
+			
 		},
 		post : function (req, res, next)	{
 			// authentication takes care of all user posting to db

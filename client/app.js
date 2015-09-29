@@ -16,7 +16,7 @@ angular.module('puzzleTroll', [
         templateUrl: 'messages/message.html'
       })
       .state('user', {
-        url: 'users/:user',
+        url: '/users/:user',
         templateUrl: 'user/userView.html'
       })
       .state('challenges', {
