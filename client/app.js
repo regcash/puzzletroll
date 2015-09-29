@@ -1,6 +1,7 @@
 angular.module('puzzleTroll', [
   'ui.router', 
   'puzzleTroll.listModule', 
+  'puzzleTroll.challengeModule',
   'puzzleTroll.MessageModule', 
   'puzzleTroll.Util',
   'puzzleTroll.userModule'])
