@@ -12,11 +12,10 @@ module.exports.getChallenges = function() {
 };
 
 module.exports.getMessages = function () {
-  return Message.findAll()
-    .then(function (result) {
-      //console.log(result);
-      return result;
-    });
+  return Message.findAll({})
+    // .then(function (result) {
+    //   return result;
+    // });
 };
 
 module.exports.findUser = function(where)  {
