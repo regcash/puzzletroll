@@ -45,6 +45,11 @@ app.get('/home', isLoggedIn, function(req,res,next){
   res.sendFile('home.html', {root: __dirname + '/../client/home/'});
 });
 
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
 app.use('/api', isLoggedIn, router);
 
 app.use(express.static(__dirname + '/../client/'));
