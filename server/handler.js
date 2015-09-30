@@ -9,14 +9,18 @@ module.exports = {
 			console.log('user get');
 			var params = req.url.substring(1).split('/');
 			if(params[1]){
-				query.findUser({name: params[1]})
-					.then(function(data){
-						res.send(data);
-					})
-					.catch(function (err) {
-						console.error(err);
-						res.send();
-					});
+				if(params[1]==="me"){
+					res.end(JSON.stringify(req.user.id));
+				}else{
+					query.findUser({name: params[1]})
+						.then(function(data){
+							res.send(data);
+						})
+						.catch(function (err) {
+							console.error(err);
+							res.send();
+						});
+				}
 			}else{
 				query.getUsers()
 				.then(function (data) {
