@@ -25,6 +25,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 var isLoggedIn = function(req,res,next){
   console.log(req.isAuthenticated());
   if(req.isAuthenticated()){
