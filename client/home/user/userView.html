@@ -1,9 +1,12 @@
 <div class="container">
-  <div ng-controller="userController">
-  	<p>USER</p>
-  	{{user}}
-  	{{name}}
-  	{{email}}
-
+  <div class="jumbotron" id="profile" ng-controller="userController">
+  	<h1>{{name}}</h1>
+  	<p>{{email}}</p>
+    <div class="row">
+      <div class="col-md-4">Completed Challenges: {{completedChallenges}}</div>
+      <div class="col-md-4">Authored Challenges: {{authoredChallenges}}</div>
+      <div class="col-md-4">Solved Score: {{solvedScore}}</div>
+      <div class="col-md-4">{{authoredScore}}</div>
+    </div>
   </div>
 </div>
