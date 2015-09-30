@@ -3,7 +3,8 @@ var db = require('../db');
 
 var Message = db.define('Message', {
   name: sequelize.STRING,
-  message: sequelize.STRING
+  message: sequelize.STRING,
+  challenge: sequelize.STRING
 });
 
 Message.sync();

@@ -1,9 +1,13 @@
 <div ng-controller='messageCtrl'>
 	<p>messages </p>
-  <ul> {{name}}
-    <li ng-repeat='message in messages'>
-      <div class='user'>{{message.name}}:</div> 
-      <div class='message'>{{message.message}}</div>
+	<form>
+		<input placeHolder='Post to board' ng-model='textToPost'></input>
+		<input type='button' ng-click='postMessage()' value='post'></post>
+	</form>
+  <ul> 
+    <li ng-repeat='msg in messages'>
+      <div class='user'>{{msg.name}}:</div> 
+      <div class='message'>{{msg.message}}</div>
     <li>
   </ul>
 </div>
