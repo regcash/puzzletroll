@@ -11,7 +11,19 @@ module.exports = {
 			if(params[1]){
 				if(params[1]==="me"){
 					res.end(JSON.stringify(req.user.id));
-				}else{
+				} 
+				else if (params[1] === 'checkChallenges') {
+					query.findUserSolvedChallenges({id: req.user.id})
+						.then(function (data) {
+							console.log(data);
+							res.send(data);
+						})
+						.catch(function (err) {
+							console.error(err);
+							res.send(404);
+						})
+				}
+				else{
 					query.findUser({name: params[1]})
 						.then(function(data){
 							res.send(data);

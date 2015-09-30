@@ -4,6 +4,7 @@ angular.module('puzzleTroll.userModule', ['ui.router', 'puzzleTroll.Util'])
 	console.log($stateParams.user);
 	reqUtil.get('users', $stateParams.user)
 		.then(function(data){
+		  console.log(data);
 			var user = data.data;
 			$scope.name = user.name;
 			$scope.email = user.email;
