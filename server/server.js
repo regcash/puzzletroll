@@ -25,13 +25,12 @@ app.use(session({
   cookie: { }
 }));
 
-app.use(express.static(__dirname + '/../client/'));
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
             passport.authenticate('google', {
-                    successRedirect : '/home',
+                    successRedirect : '/home/',
                     failureRedirect : '/login'
             }));
 
@@ -41,4 +40,5 @@ app.get('/home', function(req,res,next){
 
 app.use('/api', router);
 
+app.use(express.static(__dirname + '/../client/'));
 app.listen(process.env.PORT || 8080);

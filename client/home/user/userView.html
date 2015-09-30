@@ -1,10 +1,20 @@
 <div class="container">
-  <div ng-controller="userController">
-    <div>{{ name }}</div>
-    <div>{{ email }}</div>
-    <div>{{ completedChallenges }}</div>
-    <div>{{ authoredChallenges }}</div>
-    <div>{{ solvedScore }}</div>
-    <div>{{ authoredScore }}</div>
+  <style>
+  .jumbotron  {
+    color: white;
+    background-color: black;
+    border: 2px solid;
+    border-color: grey;
+  }
+  </style>
+  <div class="jumbotron" ng-controller="userController">
+  	<h1>{{name}}</h1>
+  	<p>{{email}}</p>
+    <div class="row">
+      <div class="col-md-4">Completed Challenges: {{completedChallenges}}</div>
+      <div class="col-md-4">Authored Challenges: {{authoredChallenges}}</div>
+      <div class="col-md-4">Solved Score: {{solvedScore}}</div>
+      <p>{{authoredScore}}</p>
+    </div>
   </div>
 </div>

@@ -1,20 +1,23 @@
 angular.module('puzzleTroll.Util', [])
-  .factory('http', function ($http) {
+  .factory('reqUtil', function ($http) {
 
-    var get = function(route){
+    var get = function(route, params){
+      params = params ? '/' + params : '';
       return $http({
         method: 'GET',
-        url: 'http://127.0.0.1:8080/api/'+route        
-      }).then(function(res){
-        return res;
-      });
+        url: 'http://localhost:8080/api/' + route + params        
+      })
+      .then(function(r){
+        return r;
+      })
+      .catch(function(c){
+        return c;
+      })
     };
 
     var post = function () {
 
     };
-
-
 
 
     return {

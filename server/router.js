@@ -1,13 +1,13 @@
 var handler = require('./handler');
 
 module.exports = function (req, res, next){
-	res.set(defaultCorsHeaders);
-	var route = req.url.substring(1);
+	// res.set(defaultCorsHeaders);
+	var route = req.url.substring(1).split('/')[0];
 
 	//if not valid, send back redirect
-	if(!isValidRoute(route)){
-		res.status(300).redirect('/');
-	}
+	// if(!isValidRoute(route)){
+	// 	res.redirect('/');
+	// }
 	switch(req.method){
 		case 'GET':
 			handler[route].get(req, res, next);
@@ -20,11 +20,12 @@ module.exports = function (req, res, next){
 			handler[route].post(req, res, next);
 			break;
 		case 'OPTIONS':
-			res.set(200).send('okay to continue!');
+			res.send('okay to continue!');
 			break;
 		//if anything else, redirect to 
 		default:
-			res.status(300).redirect('/');
+			console.log('nooooo');
+			res.redirect('/');
 	}
 };
 
