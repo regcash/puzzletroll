@@ -30,7 +30,9 @@ var isLoggedIn = function(req,res,next){
   if(req.isAuthenticated()){
     return next();
   }
+  //VV toggle out below to turn on/off authentication
   res.redirect('/');
+  // return next();
 }
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));

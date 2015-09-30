@@ -29,6 +29,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jshint']);
+
   grunt.registerTask('pull', function() {
   	var c = shell.exec('git pull upstream master').code;
     if(c !== 0) {
@@ -36,5 +37,11 @@ module.exports = function(grunt) {
     	shell.exec('bower install');
     }
 	});
+
+  grunt.registerTask('drop', function () {
+    shell.exec('echo dropping database... && mysql -u root < db/.dropDB.sql');
+    shell.exec('echo adding schema... && mysql -u root < db/schema.sql');
+    shell.exec('echo adding fake data... && mysql -u root < db/fakeData.sql');
+  });
 
 };

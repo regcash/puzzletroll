@@ -12,10 +12,7 @@ module.exports.getChallenges = function() {
 };
 
 module.exports.getMessages = function () {
-  return Message.findAll({})
-    // .then(function (result) {
-    //   return result;
-    // });
+  return Message.findAll({});
 };
 
 module.exports.findUser = function(where)  {
@@ -26,6 +23,12 @@ module.exports.findUser = function(where)  {
 
 module.exports.findChallenge = function(where)  {
    return Challenge.findOne({
+    where: where
+  });
+};
+
+module.exports.findMessages = function(where) {
+  return Message.findAll({
     where: where
   });
 };
@@ -72,6 +75,14 @@ module.exports.createChallenge = function(challenge)  {
     answer: challenge.answer,
     score: challenge.score,
     difficulty: challenge.difficulty
+  });
+};
+
+module.exports.createMessage = function(message) {
+  return Message.create({
+    name: message.name,
+    message: message.message,
+    challenge: message.challenge
   });
 };
 
