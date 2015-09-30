@@ -7,20 +7,19 @@ module.exports = {
 	users : {
 		get : function (req, res, next) {
 			console.log('user get');
-			var params = req.url.substring(1).split('/')
-			console.log(params);
+			var params = req.url.substring(1).split('/');
 			if(params[1]){
 				query.findUser({name: params[1]})
 					.then(function(data){
 						res.send(data);
 					})
-					.catch(function(err){
+					.catch(function (err) {
 						console.error(err);
 						res.send();
-					})
+					});
 			}else{
 				query.getUsers()
-				.then(function(data){
+				.then(function (data) {
 					res.send(data);
 				})
 				.catch(function(err){
@@ -45,16 +44,26 @@ module.exports = {
 		get : function (req, res, next) {
 			console.log('challenges get');
 			
-			query.getChallenges()
-				.then(function(data){
-					console.log('challenges data',data);
-					res.send(data);
-				})
-				.catch(function(err){
-					console.log('Get challenges error: ', err);
-					res.send();
-				});
-
+			var params = req.url.substring(1).split('/')
+			if(params[1]){
+				query.findChallenge({name: params[1]})
+					.then(function (data) {
+						res.send(data);
+					})
+					.catch(function (err) {
+						console.error(err);
+						res.send();
+					});
+			}else{
+				query.getChallenges()
+					.then(function (data) {
+						res.send(data);
+					})
+					.catch(function(err){
+						console.log('Get challenges error: ', err);
+						res.send();
+					});
+			}
 		},
 		post : function (req, res, next) {
 			console.log('challenges post');
@@ -72,26 +81,40 @@ module.exports = {
 	//handle requests for messages
 	messages : {
 		get : function (req, res, next) {
-			console.log(req.url);
-		
-			return query.getMessages()
-				.then(function(data){
-					
-					console.log(data);
-					res.send(data);
-				})
-				.catch(function(err){
-					console.error('messages get error: ', err);
-				});
+			console.log('get message(s)');
+			// console.log('req.url',req.url);
+			var params = req.url.substring(1).split('/');
+			if(params[1]){
+				query.findMessages({challenge : params[1]})
+					.then(function (data) {
+						
+						res.send(data);
+					})
+					.catch(function (err) {
+						console.error(err);
+						res.send();
+					});
+			}else{
+				query.getMessages()
+					.then(function (data) {
+						res.send(data);
+					})
+					.catch(function (err) {
+						console.error('messages get error: ', err);
+					});
+			}
 		},
 		post : function (req, res, next) {
 			console.log('messages post');
-			query.postMessage(message)
-				.then(function(response){
-					// res.send(response);
+			var message = req.body;
+			console.log('handler message post>>>>>>>>>',message);
+			query.createMessage(message)
+				.then(function (response) {
+					res.send('post okay!! posted: ' + message.toString());
 				})
-				.catch(function(err){
+				.catch(function (err) {
 					console.error(err);
+					res.send('error in post message');
 				});
 		}
 	}
