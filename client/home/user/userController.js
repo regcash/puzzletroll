@@ -9,7 +9,7 @@ angular.module('puzzleTroll.userModule', ['ui.router', 'puzzleTroll.Util'])
       $scope.completedChallenges = user.completedChallenges;
       $scope.authoredChallenges = user.authoredChallenges;
       $scope.solvedScore = user.solvedScore;
-      $scope.authoredScore = user.authoredScore;
+      $scope.contribScore = user.contributedScore;
       $scope.isMod = user.isMod;
 		})
 		.catch(function(err){

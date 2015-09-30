@@ -38,14 +38,14 @@ var defaultCorsHeaders = {
 };
 
 //check to see if api/____ is valid route
-var routes = ['challenges, users', 'google'];
+// var routes = ['challenges', 'users', 'google'];
 
-var isValidRoute = function (route) {
-	var found = false;
-	for(var i = 0; i < routes.length; i++){
-		if(routes[i]===route){
-			found = true;
-		}
-	}
-	return found;
-};
+// var isValidRoute = function (route) {
+// 	var found = false;
+// 	for(var i = 0; i < routes.length; i++){
+// 		if(routes[i]===route){
+// 			found = true;
+// 		}
+// 	}
+// 	return found;
+// };

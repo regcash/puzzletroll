@@ -1,8 +1,8 @@
 angular.module('puzzleTroll.challengeModule', ['puzzleTroll.Util', 'ui.router'])
 .controller('challengeController', ['$scope', '$stateParams', 'reqUtil', function ($scope, $stateParams, reqUtil) {
-  reqUtil.get('challenges', $stateParams.challenge)
+  reqUtil.get('challenges', $stateParams.name)
     .then(function (resp) {
-      console.log(resp);
+      $scope.challenge = resp.data;
     })
     .catch(function (err) {
       console.error(err);

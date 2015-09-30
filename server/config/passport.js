@@ -11,8 +11,8 @@ module.exports = function(passport){
   });
 
   passport.deserializeUser(function(id, done){
-    query.findUser({googleId: id}).then(function(err, user){
-      done(err, user);
+    query.findUser({googleId: id}).then(function(user){
+      done(null, user);
     });
   });
 
