@@ -13,6 +13,12 @@ body {
   margin: 0;
   
 }
+#profile{
+    color: white;
+    background-color: black;
+    border: 2px solid;
+    border-color: grey;
+  }
 #login{
   background-image: url('puzzle.jpg');
 }

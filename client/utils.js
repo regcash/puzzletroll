@@ -17,9 +17,6 @@ angular.module('puzzleTroll.Util', [])
 
     var post = function (route, params, data) {
       params = params ? '/' + params : '';
-      // var r = 'http://localhost:8080/api/' + route + params;
-      // console.log(data);
-      // return new Promise(function(res, rej){});
       return $http({
         method : 'POST',
         url : 'http://localhost:8080/api/' + route + params,
