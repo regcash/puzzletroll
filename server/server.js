@@ -26,12 +26,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var isLoggedIn = function(req,res,next){
-  // console.log(req.isAuthenticated());
+  console.log(req.isAuthenticated());
   if(req.isAuthenticated()){
     return next();
   }
-  // res.redirect('/');
-  return next();
+  //VV toggle out below to turn on/off authentication
+  res.redirect('/');
+  // return next();
 }
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
