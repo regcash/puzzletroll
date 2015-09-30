@@ -1,3 +1,5 @@
+USE puzzletrolldb;
+
 INSERT INTO challenges (name, prompt, answer, score, difficulty) 
 	VALUES ('subway', 'eat a shitload of subway','maybe loose weight', 80, 100);
 
