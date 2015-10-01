@@ -1,8 +1,7 @@
 <div class="container" ng-controller="challengeController">
-  This is an area for a challenge's answer view:
   <form ng-submit="checkAnswer()">
-    <input type="text" placeholder="enter your answer here" ng-model="answer">
-    <button>Submit Answer</button>
+    <input type="text" class="form-control" placeholder="enter your answer here" ng-model="answer">
+    <button class="btn btn-danger">Submit Answer</button>
   </form>
   <div ng-model="isCorrect">{{text}}</div>
 </div>
