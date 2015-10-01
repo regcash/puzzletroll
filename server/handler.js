@@ -21,7 +21,7 @@ module.exports = {
 						.catch(function (err) {
 							console.error(err);
 							res.send(404);
-						})
+						});
 				}
 				else{
 					query.findUser({name: params[1]})
@@ -60,7 +60,7 @@ module.exports = {
 		get : function (req, res, next) {
 			console.log('challenges get');
 			
-			var params = req.url.substring(1).split('/')
+			var params = req.url.substring(1).split('/');
 			if(params[1]){
 				query.findChallenge({name: params[1]})
 					.then(function (data) {
