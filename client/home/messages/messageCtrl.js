@@ -21,8 +21,10 @@ angular.module('puzzleTroll.MessageModule', ['puzzleTroll.Util', 'ui.router'])
       reqUtil.get('users', 'me')
         .then(function(res){
           var user = res.data;
+          console.log(user);
       		return message = {
       			name : user.name || 'test/error',
+            userId: user.id,
       			message : $scope.textToPost,
       			challenge: $stateParams.name
       		};
@@ -36,7 +38,7 @@ angular.module('puzzleTroll.MessageModule', ['puzzleTroll.Util', 'ui.router'])
         })
         .catch(function (err) {
           console.error('msgctrl post message error: ', err);
-        })
+        });
   	};
 
   }]);

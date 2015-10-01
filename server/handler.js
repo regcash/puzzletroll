@@ -10,7 +10,7 @@ var sendOrCatch = function(promise, req, res, errMessage, sendMessage){
 		.catch(function(err){
 			errMessage ? console.error(errMessage, err) : console.error(err);
 			res.send();
-		})
+		});
 };
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
 			console.log('user get');
 			var params = req.url.substring(1).split('/');
 			if(params[1]){
-				if(params[1]==="me"){
+				if(params[1] === "me"){
 					var user = req.user.dataValues;
 					user.googleId = '';
 					user.googleToken = '';
