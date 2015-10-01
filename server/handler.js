@@ -13,6 +13,7 @@ module.exports = {
 					res.end(JSON.stringify(req.user.id));
 				} 
 				else if (params[1] === 'checkChallenges') {
+					console.log('hu');
 					query.findUserSolvedChallenges({id: req.user.id})
 						.then(function (data) {
 							console.log(data);
@@ -21,7 +22,7 @@ module.exports = {
 						.catch(function (err) {
 							console.error(err);
 							res.send(404);
-						})
+						});
 				}
 				else{
 					query.findUser({name: params[1]})

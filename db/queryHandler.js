@@ -2,7 +2,7 @@ var sequelize = require('./db');
 var User = require('./models/User');
 var Challenge = require('./models/Challenge');
 var Message = require('./models/Message');
-
+var UserChallenge = require('./models/relations');
 module.exports.getUsers = function() {
   return User.findAll({});
 };
