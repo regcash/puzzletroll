@@ -28,7 +28,7 @@ module.exports = {
 						});
 				}
 				else{
-					query.findUser({name: params[1]})
+					query.findUser({id: params[1]})
 						.then(function(data){
 							res.send(data);
 						})
