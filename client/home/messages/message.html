@@ -6,7 +6,7 @@
 	</form>
   <ul> 
     <li ng-repeat='msg in messages'>
-      <div class='user'>{{msg.name}}:</div> 
+      <div class='user' ui-sref='user({user : this.msg.id})'>{{msg.name}}:</div> 
       <div class='message'>{{msg.message}}</div>
     <li>
   </ul>

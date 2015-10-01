@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS messages (
   id int NOT NULL AUTO_INCREMENT,
   name varchar(25),
   message varchar(1000),
+  userId int,
   challenge varchar(1000),
   createdAt datetime,
   updatedAt datetime,
