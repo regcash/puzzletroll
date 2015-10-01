@@ -34,13 +34,7 @@ module.exports.findMessages = function(where) {
 };
 
 module.exports.findUserSolvedChallenges = function(user)  {
-  return Challenge.findAll({
-    where: {
-      id: UserChallenge.findAll({
-        UserId: user.id
-      })
-    }
-  });
+  return Challenge.findAll({ include:[User], where : { id: user.id } });
 };
 
 module.exports.ChallengeSolvedUsers = function(challenge) {
