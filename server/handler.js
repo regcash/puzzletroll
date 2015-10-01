@@ -1,6 +1,18 @@
 var passport = require('passport');
 var query = require('../db/queryHandler.js');
 
+var sendOrCatch = function(promise, req, res, errMessage, sendMessage){
+	promise
+		.then(function(data){
+			sendMessage ? console.log(sendMessage, data) : null;
+			res.send(data);
+		})
+		.catch(function(err){
+			errMessage ? console.error(errMessage, err) : console.error(err);
+			res.send();
+		})
+};
+
 module.exports = {
 
 //handle users requests
@@ -8,7 +20,6 @@ module.exports = {
 		get : function (req, res, next) {
 			console.log('user get');
 			var params = req.url.substring(1).split('/');
-			console.log('PARAMS',params[1]);
 			if(params[1]){
 				if(params[1]==="me"){
 					var user = req.user.dataValues;
@@ -17,35 +28,15 @@ module.exports = {
 					res.send(JSON.stringify(user));
 				} 
 				else if (params[1] === 'checkChallenges') {
-					query.findUserSolvedChallenges({id: req.user})
-						.then(function (data) {
-							console.log(data);
-							res.send(data);
-						})
-						.catch(function (err) {
-							console.error(err);
-							res.send(404);
-						});
+					sendOrCatch(query.findUserSolvedChallenges({id: req.user.id}), req, res);
 				}
 				else{
-					query.findUser({name: params[1]})
-						.then(function(data){
-							res.send(data);
-						})
-						.catch(function (err) {
-							console.error(err);
-							res.send();
-						});
+					sendOrCatch(query.findUser({id: params[1]}), req, res, 
+						'get user by id error: ');
 				}
 			}else{
-				query.getUsers()
-				.then(function (data) {
-					res.send(data);
-				})
-				.catch(function(err){
-					console.error('Get users error: ', err);
-					res.send();
-				});
+				sendOrCatch(query.getUsers(), req, res,
+					'get all users error: ');
 			}
 			
 			
@@ -63,79 +54,42 @@ module.exports = {
 	challenges : {
 		get : function (req, res, next) {
 			console.log('challenges get');
-			
 			var params = req.url.substring(1).split('/');
+
 			if(params[1]){
-				query.findChallenge({name: params[1]})
-					.then(function (data) {
-						res.send(data);
-					})
-					.catch(function (err) {
-						console.error(err);
-						res.send();
-					});
+				sendOrCatch(query.findChallenge({name: params[1]}), req, res,
+					'get challenge by Id error: ');
 			}else{
-				query.getChallenges()
-					.then(function (data) {
-						res.send(data);
-					})
-					.catch(function(err){
-						console.log('Get challenges error: ', err);
-						res.send();
-					});
+				sendOrCatch(query.getChallenges(), req, res,
+					'get all challenges error: ');
 			}
 		},
 		post : function (req, res, next) {
 			console.log('challenges post');
-			
-			query.createChallenge(req.body)
-				.then(function(){
-					res.send('Challenge posted successfully!');
-				})
-				.catch(function(err){
-					res.send('Challenge failed to post: ', err);
-				});
+			sendOrCatch(query.createChallenge(req.body), req, res, 
+				'challenge failed to post');
 		}
 	},
 
 	//handle requests for messages
 	messages : {
 		get : function (req, res, next) {
-			console.log('get message(s)');
-			// console.log('req.url',req.url);
+			console.log('get message)');
 			var params = req.url.substring(1).split('/');
 			if(params[1]){
-				query.findMessages({challenge : params[1]})
-					.then(function (data) {
-						
-						res.send(data);
-					})
-					.catch(function (err) {
-						console.error(err);
-						res.send();
-					});
+				sendOrCatch(query.findMessages({challenge : params[1]}), req, res);
 			}else{
-				query.getMessages()
-					.then(function (data) {
-						res.send(data);
-					})
-					.catch(function (err) {
-						console.error('messages get error: ', err);
-					});
+				sendOrCatch(query.getMessages(), req, res ,
+					'messages get error: ');
 			}
 		},
 		post : function (req, res, next) {
 			console.log('messages post');
 			var message = req.body;
-			query.createMessage(message)
-				.then(function (response) {
-					res.send('post okay!! posted: ' + message.toString());
-				})
-				.catch(function (err) {
-					console.error(err);
-					res.send('error in post message');
-				});
+			sendOrCatch(query.createMessage(message),req ,res,
+				'error in post message: ');
 		}
 	}
+	
 
 };
