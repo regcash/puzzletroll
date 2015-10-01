@@ -11,6 +11,7 @@ html {
 }
 body {
   margin: 0;
+  background-image: url('puzzle.jpg');
   
 }
 #profile{
@@ -18,9 +19,6 @@ body {
     background-color: black;
     border: 2px solid;
     border-color: grey;
-  }
-#login{
-  background-image: url('puzzle.jpg');
 }
 article,
 aside,
@@ -1095,7 +1093,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333;
+  color: #F0F0F0;
   background-color: #313251;
 }
 input,
@@ -2561,10 +2559,10 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
+  margin-top: 30px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
