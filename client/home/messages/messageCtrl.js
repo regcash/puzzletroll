@@ -18,19 +18,25 @@ angular.module('puzzleTroll.MessageModule', ['puzzleTroll.Util', 'ui.router'])
   	$scope.getMessages();
 
   	$scope.postMessage = function(){
-  		var message = {
-  			name : localStorage.name || 'test-Ryan',
-  			message : $scope.textToPost,
-  			challenge: $stateParams.name
-  		};
-  		$scope.textToPost = '';
-  		reqUtil.post('messages', $stateParams.name, message)
-  			.then(function (data) {
-  				$scope.getMessages();
-  			})
-  			.catch(function (err) {
-  				console.error('msgctrl post message error: ',err);
-  			})
+      reqUtil.get('users', 'me')
+        .then(function(res){
+          var user = res.data;
+      		return message = {
+      			name : user.name || 'test/error',
+      			message : $scope.textToPost,
+      			challenge: $stateParams.name
+      		};
+        })
+        .then(function(message){
+      		$scope.textToPost = '';
+      		return reqUtil.post('messages', $stateParams.name, message)
+        })
+        .then(function (data) {
+          $scope.getMessages();
+        })
+        .catch(function (err) {
+          console.error('msgctrl post message error: ', err);
+        })
   	};
 
   }]);
