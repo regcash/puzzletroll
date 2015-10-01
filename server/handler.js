@@ -8,9 +8,13 @@ module.exports = {
 		get : function (req, res, next) {
 			console.log('user get');
 			var params = req.url.substring(1).split('/');
+			console.log('PARAMS',params[1]);
 			if(params[1]){
 				if(params[1]==="me"){
-					res.end(JSON.stringify(req.user.id));
+					var user = req.user.dataValues;
+					user.googleId = '';
+					user.googleToken = '';
+					res.send(JSON.stringify(user));
 				} 
 				else if (params[1] === 'checkChallenges') {
 					query.findUserSolvedChallenges({id: req.user.id})
@@ -123,7 +127,6 @@ module.exports = {
 		post : function (req, res, next) {
 			console.log('messages post');
 			var message = req.body;
-			console.log('handler message post>>>>>>>>>',message);
 			query.createMessage(message)
 				.then(function (response) {
 					res.send('post okay!! posted: ' + message.toString());
