@@ -22,7 +22,7 @@ angular.module('puzzleTroll', [
       })
       .state('challenges', {
         url: '/challenges/:name',
-        templateUrl: 'challenge/challengeView.html'
+        templateUrl: 'challenge/challengeView.html',
       })
       .state('challenges.messages', {
         url: '/messages',
