@@ -125,3 +125,26 @@ module.exports.removeChallenge = function(challenge)  {
     challenge.destroy();
   });
 };
+
+module.exports.updateUserChallengeScore = function(user, points)  {
+  return User.findOne({
+    where: {
+      id : user.id
+    }
+  }).then(function(user)  {
+    user.solvedScore += points;
+    user.save();
+  });
+}
+
+module.exports.updateUserContribScore = function(user)  {
+  return User.findOne({
+    where: {
+      id : user.id
+    }
+  }).then(function(user)  {
+    user.contributedScore += points;
+    user.save();
+  });
+
+}
