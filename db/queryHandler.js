@@ -45,6 +45,7 @@ module.exports.getJoinUserId = function(user)  {
       userId: user.id
     }
   });
+}
 
 module.exports.getChallengesForUser = function(userJoin) {
   return Challenge.findAll({
@@ -59,7 +60,7 @@ module.exports.getJoinChallengeId = function(challenge) {
     where: {
       challengeId: challenge.id
     }
-  })
+  });
 }
 
 module.exports.getUsersForChallenge = function(challengeJoin) {
@@ -137,7 +138,7 @@ module.exports.updateUserChallengeScore = function(user, points)  {
   });
 }
 
-module.exports.updateUserContribScore = function(user)  {
+module.exports.updateUserContributedScore = function(user, points)  {
   return User.findOne({
     where: {
       id : user.id
@@ -146,5 +147,4 @@ module.exports.updateUserContribScore = function(user)  {
     user.contributedScore += points;
     user.save();
   });
-
 }
