@@ -1,9 +1,10 @@
 <div class="container" ng-controller="challengeController">
-  This is an area for a challenge view:
   <div>Name: {{challenge.name}}</div>
   <div>Description: {{challenge.prompt}}</div>
+  <div>Points if solved: {{challenge.score}}</div>
+  <div>Difficulty: {{challenge.difficulty}}</div>
   <div>
-  <a ui-sref="challenges.messages">MessageBoard</a>
-  <a ui-sref="challenges.answer">Got the answer?</a></div>
+  <button class="btn btn-info" ui-sref="challenges.messages">MessageBoard</button>
+  <button class="btn btn-info" ui-sref="challenges.answer">Got the answer?</button></div>
   <div ui-view></div>
 </div>

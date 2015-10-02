@@ -45,7 +45,6 @@ module.exports.getJoinUserId = function(user)  {
       userId: user.id
     }
   });
-};
 
 module.exports.getChallengesForUser = function(userJoin) {
   return Challenge.findAll({
