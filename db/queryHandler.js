@@ -3,6 +3,7 @@ var User = require('./models/User');
 var Challenge = require('./models/Challenge');
 var Message = require('./models/Message');
 var UserChallenge = require('./models/relations');
+
 module.exports.getUsers = function() {
   return User.findAll({});
 };
@@ -32,19 +33,37 @@ module.exports.findMessages = function(where) {
     where: where
   });
 };
-
-module.exports.findUserSolvedChallenges = function(user)  {
-  return Challenge.findAll({ include:[User], where : { id: user.id } });
-};
-
-module.exports.ChallengeSolvedUsers = function(challenge) {
-  return User.findAll({
+//To get all challenges solved by a user, you must first
+//get the id in the join table. the data returned in the
+//promise is also an array, so you must access the data
+//in the first index, ex: getChallengesForUser(user[0].dataValues);
+//look at the tests for passing in and using data for these methods properly.
+//ps the methods had to be seperated because of how promises work.
+module.exports.getJoinUserId = function(user)  {
+  return UserChallenge.findAll({
     where: {
-      id: UserChallenge.findAll({
-        ChallengeId: challenge.id
-      })
+      userId: user.id
     }
   });
+
+module.exports.getChallengesForUser = function(userJoin) {
+  return Challenge.findAll({
+    where: {
+      id: userJoin.challengeId
+    }
+  });
+}
+
+module.exports.getJoinChallengeId = function(challenge) {
+  return UserChallenge.findAll({
+    where: {
+      challengeId: challenge.id
+    }
+  })
+}
+
+module.exports.getUsersForChallenge = function(challengeJoin) {
+    return User.findOne({id: challengeJoin.userId});
 };
 
 module.exports.createUser = function(user)  {
@@ -81,22 +100,11 @@ module.exports.createMessage = function(message) {
 };
 
 module.exports.addChallengeCompleted = function(user, challenge)  {
-  User.findOne({
-    where: {
-      name: user.name
-    }
-  }).then(function(user)  {
-    user.addChallenge(challenge);
+  return UserChallenge.create({
+    userId: user.id,
+    challengeId: challenge.id
   });
-
-  Challenge.findOne({
-    where: {
-      name: challenge.name
-    }
-  }).then(function(challenge)  {
-    challenge.addUser(user);
-  });
-};
+}
 
 module.exports.removeUser = function(user)  {
   return User.findOne({

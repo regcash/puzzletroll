@@ -4,6 +4,7 @@ var expect = require('../../node_modules/chai/chai').expect;
 var query = require('../queryHandler');
 var User = require('../models/User');
 var Challenge = require('../models/Challenge');
+var UserChallenge = require('../models/relations');
 
 describe("Puzzle Troll DB Spec", function() {
 
@@ -34,7 +35,7 @@ describe("Puzzle Troll DB Spec", function() {
 
   it("Should find a specified user", function()  {
     query.findUser({name: 'lol'}).then(function(user) {
-      expect(user.name).to.eql('lol');
+      expect(user.dataValues.name).to.eql('lol');
     }).catch(function(err)  {
       console.error("CANNOT FIND A SPECIFIED USER: ", err);
     });
@@ -42,28 +43,39 @@ describe("Puzzle Troll DB Spec", function() {
 
   it("Should find a specifed challenge", function()  {
     query.findChallenge({name: 'lol'}).then(function(challenge) {
-      expect(challenge.answer).to.eql('kekles');
+      expect(challenge.dataValues.answer).to.eql('kekles');
     }).catch(function(err)  {
       console.error("CANNOT FIND A SPECIFIED CHALLENGE: ", err);
     });
   });
 
-  it("Should add a completed challenge for the user (and vice versa)", function()  {
-    query.addChallengeCompleted({name: 'lol'}, {
-      name: 'lol',
-      prompt: 'dsfjls;kd',
-      answer: 'kekles',
-      score: 100,
-      difficulty: 100
-    });
-    // expect().to.eql();
-  });
-
   it("Should find all challenges solved by a specifed user", function() {
+    query.findUser({name: 'lol'}).then(function(user) {
+      query.findChallenge({name: 'lol'}).then(function(challenge) {
+        query.addChallengeCompleted(user, challenge);
+      });  
+    });
 
+    query.findUser({name: 'lol'}).then(function(user) {
+      query.getJoinUserId(user.dataValues).then(function(userJoin)  {
+        query.getChallengesForUser(userJoin[0].dataValues).then(function(challenges)  {
+          expect(challenges[0].dataValues.id).to.eql(2);
+          expect(challenges[0].dataValues.name).to.eql('lol');
+        });
+      });
+    });
   });
+
 
   it("Should find all users who solved a specified challenge", function() {
+    query.findChallenge({name:'lol'}).then(function(challenge)  {
+      query.getJoinChallengeId(challenge.dataValues).then(function(challengeJoin)  {
+        query.getUsersForChallenge(challengeJoin[0].dataValues).then(function(users)  {
+          expect(users[0].dataValues.id).to.eql(2);
+          expect(users[0].dataValues.name).to.eql('lol');
+        })
+      });
+    });
 
   });
 
