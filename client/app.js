@@ -4,7 +4,8 @@ angular.module('puzzleTroll', [
   'puzzleTroll.challengeModule',
   'puzzleTroll.MessageModule', 
   'puzzleTroll.Util',
-  'puzzleTroll.userModule'])
+  'puzzleTroll.userModule',
+  'puzzleTroll.homeModule'])
 	.config(function ($stateProvider, $urlRouterProvider) {
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
