@@ -28,7 +28,22 @@ module.exports = {
 					res.send(JSON.stringify(user));
 				} 
 				else if (params[1] === 'checkChallenges') {
-					sendOrCatch(query.findUserSolvedChallenges({id: req.user.id}), req, res);
+					query.findUser({id: req.user.id}).then(function (user) {
+						console.log(user.dataValues);
+						query.getJoinUserId(user.dataValues)
+							.then(function (userJoin) {
+								if (userJoin.length === 0){
+									console.log('length 0', userJoin);
+									res.send(userJoin);
+								} else {
+									console.log('userJoin', userJoin[0].dataValues);
+									query.getChallengesForUser(userJoin[0].dataValues)
+										.then(function (challenges) {
+											res.send(challenges);
+										});
+								}
+							});
+					});
 				}
 				else{
 					sendOrCatch(query.findUser({id: params[1]}), req, res, 
@@ -44,6 +59,19 @@ module.exports = {
 		post : function (req, res, next)	{
 			// authentication takes care of all user posting to db
 			console.log('user post');
+			var params = req.url.substring(1).split('/');
+			if (params[1] === 'updateScore') {
+				console.log(req.body);
+				query.findUser({id: req.user.id}).then(function(user) {
+				  query.findChallenge({id: req.body.id}).then(function(challenge) {
+				    query.addChallengeCompleted(user, challenge);
+				  });
+				}); 
+				query.updateUserChallengeScore({id : req.user.id}, req.body.score)
+					.then(function (resp) {
+						console.log("updated user score");
+					});
+			}
 			
 			// res.send('user posting handled by Oauth')
 			res.redirect('/');
