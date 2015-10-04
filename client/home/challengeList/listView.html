@@ -1,4 +1,6 @@
-<div class="container" ng-controller="listController">
+<div ng-controller="listController">
+<div class="centerContainer">
+<h1>The Challenge List</h1>
   <ul class="list-unstyled">
     <li ng-repeat="challenge in challenges"><a class="btn btn-primary btn-lg" href="#challenges/{{challenge.name}}">{{challenge.name}}</a></li>
     <li><a class="btn btn-primary btn-lg" href="#challenge2">Challenge 2 (hardcoded)</a></li>
@@ -6,4 +8,5 @@
     <li><a class="btn btn-primary btn-lg" href="#challenge4">Challenge 4 (hardcoded)</a></li>
     <li><a class="btn btn-primary btn-lg" href="#challenge5">Challenge 5 (hardcoded)</a></li>
   </ul>
+</div>
 </div>
