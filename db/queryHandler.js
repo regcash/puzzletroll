@@ -107,7 +107,11 @@ module.exports.addChallengeCompleted = function(user, challenge)  {
     challengeId: challenge.id
   });
 
-  return User.findOne({id: user.id}).then(function(user) {
+  return User.findOne({
+    where : {
+      id: user.id
+      }
+    }).then(function(user) {
     user.completedChallenges += 1;
     user.save();
   });
