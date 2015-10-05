@@ -102,14 +102,9 @@ module.exports.createMessage = function(message) {
 };
 
 module.exports.addChallengeCompleted = function(user, challenge)  {
-  UserChallenge.create({
+  return UserChallenge.create({
     userId: user.id,
     challengeId: challenge.id
-  });
-
-  return User.findOne({id: user.id}).then(function(user) {
-    user.completedChallenges += 1;
-    user.save();
   });
 };
 
