@@ -5,7 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "test": "mocha server/spec/server-spec.js && mocha db/spec/db-spec.js",
-    "start": "mysql.server start && mysql -u root < db/schema.sql && nodemon server/server.js"
+    "devStart": "mysql.server start && mysql -u root < db/schema.sql && nodemon server/server.js",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
