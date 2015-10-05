@@ -13,11 +13,32 @@ angular.module('puzzleTroll.challengeModule', ['puzzleTroll.Util', 'ui.router'])
   
   $scope.checkAnswer = function () {
     $scope.text = '';
+    //Had to check if answer was correct, and if so, check if User has already completed challenge
+    // Finally, add points/challenge if not completed.
     reqUtil.get('challenges', $stateParams.name)
       .then(function (resp) {
         if ($scope.answer === resp.data.answer) {
-          console.log("true");
-          $scope.text = "Correct!";
+          reqUtil.get('users', 'checkChallenges')
+            .then(function (resp) {
+              var found = false;
+              if (resp.data.length > 0) {
+                for (var x in resp.data) {
+                  if (resp.data[x].id === $scope.challenge.id) {
+                    $scope.text = "Correct!";
+                    found = true;
+                  }
+                }
+              } 
+              if (!found || resp.data[0].id !== $scope.challenge.id) {
+                //update user score
+                reqUtil.post('users', 'updateScore', { 
+                  score : $scope.challenge.score, 
+                  id : $scope.challenge.id
+                }).then(function (resp) {
+                    $scope.text = "Correct! You earned " + $scope.challenge.score + " points!";
+                  });
+              }  
+            });
         } else {
           $scope.text = "Sorry Try Again!";
         }

@@ -96,6 +96,7 @@ module.exports.createMessage = function(message) {
   return Message.create({
     name: message.name,
     message: message.message,
+    userId: message.userId,
     challenge: message.challenge
   });
 };
@@ -110,7 +111,7 @@ module.exports.addChallengeCompleted = function(user, challenge)  {
     user.completedChallenges += 1;
     user.save();
   });
-}
+};
 
 module.exports.removeUser = function(user)  {
   return User.findOne({
