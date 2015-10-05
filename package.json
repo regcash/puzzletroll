@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha server/spec/server-spec.js && mocha db/spec/db-spec.js",
     "devStart": "mysql.server start && mysql -u root < db/schema.sql && nodemon server/server.js",
-    "start": "node server/server.js",
+    "start": "mysql < db/schema.sql && node server/server.js",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
