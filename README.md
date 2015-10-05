@@ -74,3 +74,19 @@ client/index.html is our login page. Once a user has successfully authenticated 
 client/utils.js has the factory 'reqUtil' which manages the API calls for the user.
 client/app.js is the angularApp and manages states for each of html templates that will be rendered.
 Inside client/home/ we have angular controllers and views for challenge(+challengeAnswer view), challengeList, message, user.
+
+
+## Grunt / 
+```
+$ grunt pull
+```
+- pulls from upstream master, bower installs & npm installs
+```
+$ grunt drop
+```
+- drops local puzzletrolldb, adds schema in and then adds fake data in
+```
+$ grunt preDeploy
+```
+- jshints src files, uglifies/minifies css & source
+
