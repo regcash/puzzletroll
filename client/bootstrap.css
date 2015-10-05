@@ -9,11 +9,33 @@ body {
   
 }
 #profile{
-    color: white;
-    background-color: black;
-    border: 2px solid;
-    border-color: grey;
+  color: white;
+  background-color: black;
+  border: 2px solid;
+  border-color: grey;
 }
+.messages {
+  margin: 10px auto 0px auto;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black;
+  background-color: darkgrey;
+  color: black;
+  font-family: Verdana, Geneva, sans-serif
+}
+.user, .message{
+  display: inline-block;
+  margin-left: 10px;
+}
+#messageForm {
+  margin: 0px 20px 10px 20px;
+}
+#messageInput{
+  display: inline-block;
+  border: solid;
+}
+#messageList li:nth-child(even) { background-color: #CCC;}
+#messageList li:nth-child(odd) {background-color: #AAA;}
 article,
 aside,
 details,
