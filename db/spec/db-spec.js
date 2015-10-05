@@ -8,13 +8,14 @@ var UserChallenge = require('../models/relations');
 
 describe("Puzzle Troll DB Spec", function() {
 
-  it("Should create a new user", function() {
+  it("Should create a new user", function(done) {
     query.createUser({name: 'lol'}).then(function(user) {
       expect(user.dataValues.name).to.eql('lol');
     });
+    done();
   });
 
-  it("Should create a new challenge", function()  {
+  it("Should create a new challenge", function(done)  {
     query.createChallenge({
       name: 'lol',
       prompt: 'dsfjls;kd',
@@ -31,31 +32,40 @@ describe("Puzzle Troll DB Spec", function() {
     }).catch(function(err)  {
       console.log('LEGOS: ', err);
     });
+
+    done();
   });
 
-  it("Should find a specified user", function()  {
+  it("Should find a specified user", function(done)  {
     query.findUser({name: 'lol'}).then(function(user) {
       expect(user.dataValues.name).to.eql('lol');
     }).catch(function(err)  {
       console.error("CANNOT FIND A SPECIFIED USER: ", err);
     });
+
+    done();
   });
 
-  it("Should find a specifed challenge", function()  {
+  it("Should find a specifed challenge", function(done)  {
     query.findChallenge({name: 'lol'}).then(function(challenge) {
       expect(challenge.dataValues.answer).to.eql('kekles');
     }).catch(function(err)  {
       console.error("CANNOT FIND A SPECIFIED CHALLENGE: ", err);
     });
+
+    done();
   });
 
-  it("Should find all challenges solved by a specifed user", function() {
+  it("Should add a challenge completed for the user", function(done)  {
     query.findUser({name: 'lol'}).then(function(user) {
       query.findChallenge({name: 'lol'}).then(function(challenge) {
         query.addChallengeCompleted(user, challenge);
       });  
     });
+    done();
+  });
 
+  it("Should find all challenges solved by a specifed user", function(done) {
     query.findUser({name: 'lol'}).then(function(user) {
       query.getJoinUserId(user.dataValues).then(function(userJoin)  {
         query.getChallengesForUser(userJoin[0].dataValues).then(function(challenges)  {
@@ -64,10 +74,11 @@ describe("Puzzle Troll DB Spec", function() {
         });
       });
     });
+    done();
   });
 
 
-  it("Should find all users who solved a specified challenge", function() {
+  it("Should find all users who solved a specified challenge", function(done) {
     query.findChallenge({name:'lol'}).then(function(challenge)  {
       query.getJoinChallengeId(challenge.dataValues).then(function(challengeJoin)  {
         query.getUsersForChallenge(challengeJoin[0].dataValues).then(function(users)  {
@@ -76,10 +87,25 @@ describe("Puzzle Troll DB Spec", function() {
         })
       });
     });
-
+    done();
   });
 
-  it("Should remove a specified user", function() {
+  it("Should update a user's score", function(done)  {
+    query.findUser({id: 2}).then(function(user) {
+      console.log(user.dataValues);
+      query.updateUserChallengeScore(user.dataValues, 10);
+      query.updateUserContributedScore(user.dataValues, 1);
+    });
+
+    query.findUser({id: 2}).then(function(user) {
+      expect(user.dataValues.solvedScore).to.eql(10);
+      expect(user.dataValues.contributedScore).to.eql(1);
+    });
+    done();
+  });
+
+
+  it("Should remove a specified user", function(done) {
     query.createUser({name: 'why'}).then(function(user) {
       query.removeUser(user);
     });
@@ -87,10 +113,11 @@ describe("Puzzle Troll DB Spec", function() {
       expect(user).to.eql(null);
     }).catch(function(err)  {
       console.error("CANNOT REMOVE A SPECIFIED USER: ", err);
-    });;
+    });
+    done();
   });
 
-  it("Should remove a specified challenge", function()  {
+  it("Should remove a specified challenge", function(done)  {
     query.createChallenge({
       name: 'why',
       prompt: 'why',
@@ -106,5 +133,6 @@ describe("Puzzle Troll DB Spec", function() {
     }).catch(function(err)  {
       console.error("CANNOT REMOVE A SPECIFIED CHALLENGE: ", err);
     });
+    done();
   });
 });
