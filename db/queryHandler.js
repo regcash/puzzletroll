@@ -105,6 +105,11 @@ module.exports.addChallengeCompleted = function(user, challenge)  {
     userId: user.id,
     challengeId: challenge.id
   });
+
+  User.findOne({id: user.id}).then(function(user) {
+    user.completedChallenges += 1;
+    user.save();
+  });
 }
 
 module.exports.removeUser = function(user)  {
