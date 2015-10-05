@@ -102,12 +102,12 @@ module.exports.createMessage = function(message) {
 };
 
 module.exports.addChallengeCompleted = function(user, challenge)  {
-  return UserChallenge.create({
+  UserChallenge.create({
     userId: user.id,
     challengeId: challenge.id
   });
 
-  User.findOne({id: user.id}).then(function(user) {
+  return User.findOne({id: user.id}).then(function(user) {
     user.completedChallenges += 1;
     user.save();
   });
