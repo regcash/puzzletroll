@@ -44,7 +44,7 @@ Using Node and Express we have created a REST API:
 - GET /api/users/:id  responds with user queried by provided id
 - GET /api/users/me   responds with id of current user
 - GET /api/users/checkChallenges    responds with completed challenges of current user
-- POST /api/users/updateScore data={id: challengeID, score: challengeScore} adds the challenge from the given id to the user's list of completed challenges and adds the challenge's score to the user's total score.
+- POST /api/users/updateScore '''data={id: challengeID, score: challengeScore}''' adds the challenge from the given id to the user's list of completed challenges and adds the challenge's score to the user's total score.
 - GET /api/challenges/  responds with all challenges
 - GET /api/challenges/:challengeName  responds with the challenge matching the provided name
 - POST /api/challenges/ ```data={
@@ -61,9 +61,7 @@ creates the provided challenge in the database
   name: username,
   message: message,
   challenge: challenge
-} ```
-
-adds the given message to the database
+} ``` adds the given message to the database
 
 server.js uses router.js which uses handler.js for all API requests.
 
