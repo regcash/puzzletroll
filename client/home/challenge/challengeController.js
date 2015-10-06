@@ -21,11 +21,13 @@ angular.module('puzzleTroll.challengeModule', ['puzzleTroll.Util', 'ui.router'])
           reqUtil.get('users', 'checkChallenges')
             .then(function (resp) {
               var found = false;
+              console.log(resp.data);
               if (resp.data.length > 0) {
                 for (var x in resp.data) {
                   if (resp.data[x].id === $scope.challenge.id) {
                     $scope.text = "Correct!";
                     found = true;
+                    console.log('we in here');
                   }
                 }
               } 

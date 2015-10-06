@@ -101,7 +101,12 @@ module.exports.createMessage = function(message) {
   });
 };
 
-module.exports.addChallengeCompleted = function(user, challenge)  {
+module.exports.addChallengeCompleted = function(user, challenge) {
+  UserChallenge.create({
+      userId: user.id,
+      challengeId: challenge.id
+  });
+
   return User.findOne({
     where : {
       id: user.id
